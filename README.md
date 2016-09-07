@@ -3,7 +3,7 @@
 
 [![Docker hub](https://img.shields.io/badge/docker--hub-cbgeo--lem-ff69b4.svg)](https://hub.docker.com/r/cbgeo/lem)
 [![Quay image](https://img.shields.io/badge/quay--image-cbgeo--lem-ff69b4.svg)](https://quay.io/repository/cbgeo/lem)
-[![Build status](https://api.travis-ci.org/cb-geo/docker-lem.svg)](https://api.travis-ci.org/cb-geo/docker-lem.svg)
+[![Build status](https://api.travis-ci.org/cb-geo/docker-lem.svg)](https://travis-ci.org/cb-geo/docker-lem)
 [![](https://images.microbadger.com/badges/image/cbgeo/lem.svg)](http://microbadger.com/images/cbgeo/lem)
 
 ## Tools
