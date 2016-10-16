@@ -5,7 +5,7 @@ MAINTAINER Krishna Kumar <kks32@cam.ac.uk>
 RUN dnf update -y && \
     dnf remove -y vim-minimal python sqlite && \
     dnf install -y clang cmake cppcheck eigen3-devel findutils gcc gcc-c++ \
-                   git make valgrind vim voro++ voro++-devel && \
+                   git make valgrind vim voro++ voro++-devel wget&& \
     dnf clean all
 
 # Install Intel Threaded Building blocks
