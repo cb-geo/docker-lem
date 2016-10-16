@@ -5,7 +5,7 @@ MAINTAINER Krishna Kumar <kks32@cam.ac.uk>
 RUN dnf update -y && \
     dnf remove -y vim-minimal python sqlite && \
     dnf install -y clang cmake cppcheck eigen3-devel findutils gcc gcc-c++ \
-                   git make valgrind vim voro++ voro++-devel wget&& \
+                   git make tar valgrind vim voro++ voro++-devel wget&& \
     dnf clean all
 
 # Install Intel Threaded Building blocks
@@ -19,7 +19,7 @@ RUN wget ${TBB_DOWNLOAD_URL} \
 
 RUN sed -i "s%SUBSTITUTE_INSTALL_DIR_HERE%${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss%" ${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/bin/tbbvars.*
 
-RUN echo "source ${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/bin/tbbvars.sh intel64" >> /etc/bash.bashrc
+# RUN echo "source ${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/bin/tbbvars.sh intel64" >> /etc/bash.bashrc
 
 # Create a user cbgeo
 RUN useradd cbgeo
