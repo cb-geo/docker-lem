@@ -8,6 +8,8 @@ RUN dnf update -y && \
                    git make tar valgrind vim voro++ voro++-devel wget&& \
     dnf clean all
 
+# Install Clang 4.0
+
 # Install Intel Threaded Building blocks
 ENV TBB_VERSION 2017_20160916
 ENV TBB_DOWNLOAD_URL https://www.threadingbuildingblocks.org/sites/default/files/software_releases/linux/tbb${TBB_VERSION}oss_lin.tgz
@@ -24,6 +26,9 @@ RUN echo "source ${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/bin/tbbvars.sh intel64"
 # Create a user cbgeo
 RUN useradd cbgeo
 USER cbgeo
+
+RUN export PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/:$PATH
+RUN export LD_LIBRARY_PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/lib/:$LD_LIBRARY_PATH
 
 # Create a research directory and clone git repo of lbmdem code
 RUN mkdir -p /home/cbgeo/research && \
