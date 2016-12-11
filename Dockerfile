@@ -45,8 +45,8 @@ RUN export LD_LIBRARY_PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/lib/:$LD_LIBR
 RUN export TBB_VERSION=0
 
 # Configure MKL
-RUN echo "source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux
-source /opt/intel/mkl/bin/mklvars.sh intel64" >> ~/.bashrc
+RUN echo "source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux" >> ~/.bashrc
+RUN echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> ~/.bashrc
 
 # Create a research directory and clone git repo of lbmdem code
 RUN mkdir -p /home/cbgeo/research && \
