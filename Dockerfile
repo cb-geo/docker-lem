@@ -40,6 +40,9 @@ USER cbgeo
 
 # Configure Intel TBB
 RUN echo "source ${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/bin/tbbvars.sh intel64" >> ~/.bashrc
+RUN echo "PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/:$PATH" >> ~/.bashrc
+RUN echo "LD_LIBRARY_PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/lib/:$LD_LIBRARY_PATH" >> ~/.bashrc
+RUN echo "TBB_VERSION=0" >> ~/.bashrc
 RUN export PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/:$PATH
 RUN export LD_LIBRARY_PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/lib/:$LD_LIBRARY_PATH
 RUN export TBB_VERSION=0
