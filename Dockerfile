@@ -4,7 +4,7 @@ MAINTAINER Krishna Kumar <kks32@cam.ac.uk>
 # Update to latest packages, remove vim-minimal & Install Git, GCC, Clang, Autotools and VIM
 RUN dnf update -y && \
     dnf remove -y vim-minimal python sqlite && \
-    dnf install -y clang cmake cppcheck eigen3-devel findutils gcc gcc-c++ \
+    dnf install -y boost boost-devel clang cmake cppcheck eigen3-devel findutils gcc gcc-c++ \
                    git kernel-devel make tar valgrind vim voro++ voro++-devel wget&& \
     dnf clean all
 
