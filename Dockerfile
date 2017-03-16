@@ -5,7 +5,7 @@ MAINTAINER Krishna Kumar <kks32@cam.ac.uk>
 RUN dnf update -y && \
     dnf remove -y vim-minimal python sqlite && \
     dnf install -y boost boost-devel clang cmake cppcheck eigen3-devel findutils gcc gcc-c++ \
-                   git kernel-devel make tar valgrind vim voro++ voro++-devel wget&& \
+                   git kernel-devel make tar valgrind vim voro++ voro++-devel vtk vtk-devel wget&& \
     dnf clean all
 
 # Install MKL
