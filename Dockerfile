@@ -9,10 +9,10 @@ RUN dnf update -y && \
     dnf clean all
 
 # Install MKL
-ENV MKL_VER=l_mkl_11.3.3.210
+ENV MKL_VER=l_mkl_2017.2.174
 
 RUN cd /tmp && \
-  wget http://registrationcenter-download.intel.com/akdlm/irc_nas/9068/${MKL_VER}.tgz && \
+  wget http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/11306/${MKL_VER}.tgz && \
   tar xzf ${MKL_VER}.tgz && \
   cd ${MKL_VER} && \
   sed -i 's/ACCEPT_EULA=decline/ACCEPT_EULA=accept/g' silent.cfg && \
@@ -24,8 +24,8 @@ RUN cd /tmp && \
 
 
 # Install Intel Threaded Building blocks
-ENV TBB_VERSION 2017_20160916
-ENV TBB_DOWNLOAD_URL https://www.threadingbuildingblocks.org/sites/default/files/software_releases/linux/tbb${TBB_VERSION}oss_lin.tgz
+ENV TBB_VERSION 2017_20170226
+ENV TBB_DOWNLOAD_URL https://github.com/01org/tbb/releases/download/2017_U5/tbb${TBB_VERSION}oss_lin.tgz
 ENV TBB_INSTALL_DIR /opt
 
 RUN wget ${TBB_DOWNLOAD_URL} \
