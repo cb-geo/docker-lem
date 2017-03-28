@@ -5,7 +5,8 @@ MAINTAINER Krishna Kumar <kks32@cam.ac.uk>
 RUN dnf update -y && \
     dnf remove -y vim-minimal python sqlite && \
     dnf install -y boost boost-devel clang cmake cppcheck eigen3-devel findutils gcc gcc-c++ \
-                   git kernel-devel make tar valgrind vim voro++ voro++-devel vtk vtk-devel wget&& \
+                   git kernel-devel make sqlite sqlite-devel tar valgrind vim \
+                   voro++ voro++-devel vtk vtk-devel wget&& \
     dnf clean all
 
 # Install MKL
@@ -24,8 +25,8 @@ RUN cd /tmp && \
 
 
 # Install Intel Threaded Building blocks
-ENV TBB_VERSION 2017_20170226
-ENV TBB_DOWNLOAD_URL https://github.com/01org/tbb/releases/download/2017_U5/tbb${TBB_VERSION}oss_lin.tgz
+ENV TBB_VERSION 2017_20160916
+ENV TBB_DOWNLOAD_URL https://www.threadingbuildingblocks.org/sites/default/files/software_releases/linux/tbb${TBB_VERSION}oss_lin.tgz
 ENV TBB_INSTALL_DIR /opt
 
 RUN wget ${TBB_DOWNLOAD_URL} \
