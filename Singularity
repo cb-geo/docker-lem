@@ -6,7 +6,8 @@ From:fedora:latest
 dnf update -y && \
     dnf remove -y vim-minimal python sqlite && \
     dnf install -y boost boost-devel clang cmake cppcheck eigen3-devel findutils gcc gcc-c++ \
-                   git kernel-devel make sqlite sqlite-devel tar valgrind vim \
+                   git hdf5 hdf5-devel hdf5-openmpi hdf5-openmpi-devel kernel-devel \
+                   make sqlite sqlite-devel tar valgrind vim \
                    voro++ voro++-devel vtk vtk-devel wget&& \
     dnf clean all
 
