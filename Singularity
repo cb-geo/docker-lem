@@ -37,17 +37,10 @@ wget ${TBB_DOWNLOAD_URL} \
 	&& rm tbb${TBB_VERSION}oss_lin.tgz
 sed -i "s%SUBSTITUTE_INSTALL_DIR_HERE%${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss%" ${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/bin/tbbvars.*
 
-useradd cbgeo
-USER cbgeo
-
-echo "source ${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/bin/tbbvars.sh intel64" >> ~/.bashrc
-echo "PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/:$PATH" >> ~/.bashrc
-echo "LD_LIBRARY_PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/lib/:$LD_LIBRARY_PATH" >> ~/.bashrc
-echo "TBB_VERSION=0" >> ~/.bashrc
+source ${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/bin/tbbvars.sh intel64
 export PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/:$PATH
 export LD_LIBRARY_PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/lib/:$LD_LIBRARY_PATH
 export TBB_VERSION=0
-echo "source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux" >> ~/.bashrc
-echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> ~/.bashrc
-mkdir -p /home/cbgeo/research && \
-    cd /home/cbgeo/research 
+source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux
+source /opt/intel/mkl/bin/mklvars.sh intel64
+mkdir -p /research && cd /research 
