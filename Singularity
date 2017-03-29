@@ -22,6 +22,9 @@ cd /tmp && \
   sed -i 's/ACTIVATION_TYPE=exist_lic/ACTIVATION_TYPE=trial_lic/g' silent.cfg && \
   ./install.sh -s silent.cfg && \
   cd .. && rm -rf ${MKL_VER}*
+source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux
+source /opt/intel/mkl/bin/mklvars.sh intel64
+
 
 export TBB_VERSION=2017_20160916
 echo "
@@ -37,10 +40,10 @@ wget ${TBB_DOWNLOAD_URL} \
 	&& rm tbb${TBB_VERSION}oss_lin.tgz
 sed -i "s%SUBSTITUTE_INSTALL_DIR_HERE%${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss%" ${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/bin/tbbvars.*
 
-source ${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/bin/tbbvars.sh intel64
-export PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/:$PATH
-export LD_LIBRARY_PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/lib/:$LD_LIBRARY_PATH
+echo "
+source /opt/tbb2017_20160916oss/bin/tbbvars.sh intel64
 export TBB_VERSION=0
 source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux
-source /opt/intel/mkl/bin/mklvars.sh intel64
+source /opt/intel/mkl/bin/mklvars.sh intel64" >> /environment
+
 mkdir -p /research && cd /research 
