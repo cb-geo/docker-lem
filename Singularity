@@ -10,8 +10,8 @@ dnf update -y && \
                    voro++ voro++-devel vtk vtk-devel wget && \
     dnf clean all
 
-https://developer.download.nvidia.com/compute/cuda/repos/fedora23/x86_64/cuda-repo-fedora23-8.0.61-1.x86_64.rpm
-dnf install -y cuda-repo-fedora23-8.0.61-1.x86_64.rpm
+wget https://developer.download.nvidia.com/compute/cuda/repos/fedora23/x86_64/cuda-repo-fedora23-8.0.61-1.x86_64.rpm
+dnf install -y ./cuda-repo-fedora23-8.0.61-1.x86_64.rpm
 dnf install -y cuda
 dnf clean all
 
@@ -53,4 +53,4 @@ source /opt/intel/mkl/bin/mklvars.sh intel64" >> /environment
 mkdir -p /research && cd /research 
 
 %runscript
-  /bin/bash "$@"
+ /bin/bash "$@"
