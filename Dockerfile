@@ -10,6 +10,12 @@ RUN dnf update -y && \
                    voro++ voro++-devel vtk vtk-devel wget && \
     dnf clean all
 
+# Install CUDA
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/fedora23/x86_64/cuda-repo-fedora23-8.0.61-1.x86_64.rpm && \
+    dnf install -y ./cuda-repo-fedora23-8.0.61-1.x86_64.rpm && \
+    dnf install -y cuda && \
+    dnf clean all
+
 # Install MKL
 ENV MKL_VER=l_mkl_2017.2.174
 
@@ -62,3 +68,5 @@ RUN mkdir -p /home/cbgeo/research && \
 # Done
 #WORKDIR /home/cbgeo/research/lem
 WORKDIR /home/cbgeo/research/
+
+RUN /bin/bash "$@"

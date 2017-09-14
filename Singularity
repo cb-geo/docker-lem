@@ -1,5 +1,5 @@
-bootstrap:docker
-From:ubuntu:latest
+BootStrap:docker
+From:fedora:latest
 
 %post
 dnf update -y && \
