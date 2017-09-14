@@ -1,8 +1,7 @@
 bootstrap:docker
-From:fedora:latest
+From:ubuntu:latest
 
 %post
-# Krishna Kumar <kks32@cam.ac.uk>
 dnf update -y && \
     dnf remove -y vim-minimal python sqlite && \
     dnf install -y boost boost-devel clang cmake cppcheck eigen3-devel findutils gcc gcc-c++ \
@@ -10,6 +9,11 @@ dnf update -y && \
                    make sqlite sqlite-devel tar valgrind vim \
                    voro++ voro++-devel vtk vtk-devel wget && \
     dnf clean all
+
+https://developer.download.nvidia.com/compute/cuda/repos/fedora23/x86_64/cuda-repo-fedora23-8.0.61-1.x86_64.rpm
+dnf install -y cuda-repo-fedora23-8.0.61-1.x86_64.rpm
+dnf install -y cuda
+dnf clean all
 
 export MKL_VER=l_mkl_2017.2.174
 echo "
@@ -47,3 +51,6 @@ source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux
 source /opt/intel/mkl/bin/mklvars.sh intel64" >> /environment
 
 mkdir -p /research && cd /research 
+
+%runscript
+  /bin/bash "$@"
