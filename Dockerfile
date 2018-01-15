@@ -17,7 +17,7 @@ RUN wget https://developer.download.nvidia.com/compute/cuda/repos/fedora25/x86_6
     dnf clean all
 
 # Install MKL
-RUN dnf config-manager --add-repo https://yum.repos.intel.com/mkl/setup/intel-mkl.repo &&
+RUN dnf config-manager --add-repo https://yum.repos.intel.com/mkl/setup/intel-mkl.repo && \
     dnf install -y intel-mkl
 
 # Create a user cbgeo
