@@ -7,10 +7,13 @@
 [![](https://images.microbadger.com/badges/image/cbgeo/lem.svg)](http://microbadger.com/images/cbgeo/lem)
 
 ## Tools
-* Clang
+* Clang 4.0
 * CMake
+* CUDA
 * Eigen3
-* GCC 6
+* GCC 7
+* Intel TBB
+* Intel MKL
 * Vim
 * Voro++
 
