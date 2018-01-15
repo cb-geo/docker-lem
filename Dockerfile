@@ -17,18 +17,18 @@ RUN wget https://developer.download.nvidia.com/compute/cuda/repos/fedora25/x86_6
     dnf clean all
 
 # Install MKL
-ENV MKL_VER=l_mkl_2017.2.174
-
-RUN cd /tmp && \
-  wget http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/11306/${MKL_VER}.tgz && \
-  tar xzf ${MKL_VER}.tgz && \
-  cd ${MKL_VER} && \
-  sed -i 's/ACCEPT_EULA=decline/ACCEPT_EULA=accept/g' silent.cfg && \
-  sed -i 's/ACTIVATION_TYPE=exist_lic/ACTIVATION_TYPE=trial_lic/g' silent.cfg && \
-# NOTE: Installer may complain about "Unsupported OS". Installation should still be valid.
-  ./install.sh -s silent.cfg && \
-# Clean up
-  cd .. && rm -rf ${MKL_VER}*
+RUN wget -q http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12414/l_mkl_2018.1.163.tgz && \
+    tar -xzf l_mkl_2018.1.163.tgz && \
+    cd l_mkl_2018.1.163 && \
+    sed -i 's/ACCEPT_EULA=decline/ACCEPT_EULA=accept/g' silent.cfg && \
+    sed -i 's/ARCH_SELECTED=ALL/ARCH_SELECTED=INTEL64/g' silent.cfg && \
+    sed -i 's/COMPONENTS=DEFAULTS/COMPONENTS=;intel-comp-l-all-vars__noarch;intel-comp-nomcu-vars__noarch;intel-openmp__x86_64;intel-tbb-libs__x86_64;intel-mkl-common__noarch;intel-mkl-installer-license__noarch;intel-mkl-core__x86_64;intel-mkl-core-rt__x86_64;intel-mkl-doc__noarch;intel-mkl-doc-ps__noarch;intel-mkl-gnu__x86_64;intel-mkl-gnu-rt__x86_64;intel-mkl-common-ps__noarch;intel-mkl-core-ps__x86_64;intel-mkl-common-c__noarch;intel-mkl-core-c__x86_64;intel-mkl-common-c-ps__noarch;intel-mkl-tbb__x86_64;intel-mkl-tbb-rt__x86_64;intel-mkl-gnu-c__x86_64;intel-mkl-common-f__noarch;intel-mkl-core-f__x86_64;intel-mkl-gnu-f-rt__x86_64;intel-mkl-gnu-f__x86_64;intel-mkl-f95-common__noarch;intel-mkl-f__x86_64;intel-mkl-psxe__noarch;intel-psxe-common__noarch;intel-psxe-common-doc__noarch;intel-compxe-pset/g' silent.cfg && \
+    ./install.sh -s silent.cfg && \
+    cd .. && rm -rf * && \
+    rm -rf /opt/intel/.*.log /opt/intel/compilers_and_libraries_2018.1.163/licensing && \
+    echo "/opt/intel/mkl/lib/intel64" >> /etc/ld.so.conf.d/intel.conf && \
+    ldconfig && \
+    echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> /etc/bash.bashrc
 
 # Create a user cbgeo
 RUN useradd cbgeo
