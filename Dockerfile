@@ -6,13 +6,13 @@ RUN dnf update -y && \
     dnf remove -y vim-minimal python sqlite && \
     dnf install -y boost boost-devel clang cmake cppcheck eigen3-devel findutils gcc gcc-c++ \
                    git hdf5 hdf5-devel kernel-devel \
-                   make sqlite sqlite-devel tar valgrind vim \
+                   make sqlite sqlite-devel tar tbb tbb-devel valgrind vim \
                    voro++ voro++-devel vtk vtk-devel wget && \
     dnf clean all
 
 # Install CUDA
-RUN wget https://developer.download.nvidia.com/compute/cuda/repos/fedora23/x86_64/cuda-repo-fedora23-8.0.61-1.x86_64.rpm && \
-    dnf install -y ./cuda-repo-fedora23-8.0.61-1.x86_64.rpm && \
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/fedora25/x86_64/cuda-repo-fedora25-9.1.85-1.x86_64.rpm && \
+    dnf install -y ./cuda-repo-fedora25-9.1.85-1.x86_64.rpm && \
     dnf install -y cuda && \
     dnf clean all
 
@@ -30,30 +30,9 @@ RUN cd /tmp && \
 # Clean up
   cd .. && rm -rf ${MKL_VER}*
 
-
-# Install Intel Threaded Building blocks
-ENV TBB_VERSION 2017_20160916
-ENV TBB_DOWNLOAD_URL https://www.threadingbuildingblocks.org/sites/default/files/software_releases/linux/tbb${TBB_VERSION}oss_lin.tgz
-ENV TBB_INSTALL_DIR /opt
-
-RUN wget ${TBB_DOWNLOAD_URL} \
-	&& tar -C ${TBB_INSTALL_DIR} -xf tbb${TBB_VERSION}oss_lin.tgz \
-	&& rm tbb${TBB_VERSION}oss_lin.tgz
-
-RUN sed -i "s%SUBSTITUTE_INSTALL_DIR_HERE%${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss%" ${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/bin/tbbvars.*
-
 # Create a user cbgeo
 RUN useradd cbgeo
 USER cbgeo
-
-# Configure Intel TBB
-RUN echo "source ${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/bin/tbbvars.sh intel64" >> ~/.bashrc
-RUN echo "PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/:$PATH" >> ~/.bashrc
-RUN echo "LD_LIBRARY_PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/lib/:$LD_LIBRARY_PATH" >> ~/.bashrc
-RUN echo "TBB_VERSION=0" >> ~/.bashrc
-RUN export PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/:$PATH
-RUN export LD_LIBRARY_PATH=${TBB_INSTALL_DIR}/tbb${TBB_VERSION}oss/lib/:$LD_LIBRARY_PATH
-RUN export TBB_VERSION=0
 
 # Configure MKL
 RUN echo "source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux" >> ~/.bashrc
