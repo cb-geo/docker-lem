@@ -11,10 +11,10 @@ RUN dnf update -y && \
     dnf clean all
 
 # Install CUDA
-#RUN wget https://developer.download.nvidia.com/compute/cuda/repos/fedora25/x86_64/cuda-repo-fedora25-9.1.85-1.x86_64.rpm && \
-#    dnf install -y ./cuda-repo-fedora25-9.1.85-1.x86_64.rpm && \
-#    dnf install -y cuda && \
-#    dnf clean all
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/fedora25/x86_64/cuda-repo-fedora25-9.1.85-1.x86_64.rpm && \
+    dnf install -y ./cuda-repo-fedora25-9.1.85-1.x86_64.rpm && \
+    dnf install -y cuda && \
+    dnf clean all
 
 # Install MKL
 RUN dnf config-manager --add-repo https://yum.repos.intel.com/mkl/setup/intel-mkl.repo && \
